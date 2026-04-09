@@ -40,6 +40,8 @@ static void dealloca_mappa_soprasotto();
 static const char* get_nome_zona(enum Tipo_zona t);
 static const char* get_nome_nemico(enum Tipo_nemico n);
 static const char* get_nome_oggetto(enum Tipo_oggetto o);
+static struct Zona_mondoreale* trova_zona_per_indice(int posizione);
+static void stampa_dettagli_nodi(struct Zona_mondoreale* zona_mr, int posizione);
 
 
 
@@ -432,5 +434,36 @@ static const char* get_nome_oggetto(enum Tipo_zona o) {
         case bussola: return "Bussola";
         case schitarrata_metallica: return "Schitarrata Metallica";
         default: return "Sconosciuto";
+    }
+}
+
+// Scorre la lista e restituisce il puntatore alla zona trovata
+// Se la posizione non esiste restituisce NULL
+static struct Zona_mondoreale* trova_zona_per_indice(int posizione) {
+    struct Zona_mondoreale* corrente = prima_zona_mondoreale;
+    int indice_corrente = 1;
+
+    while (corrente != NULL && indice_corrente < posizione) {
+        corrente = corrente->avanti;
+        indice_corrente++;
+    }
+    return corrente;
+}
+
+// Prende in input il puntatore alla zona e la stampa
+static void stampa_dettagli_nodi(struct Zona_mondoreale* zona_mr, int posizione) {
+    struct Zona_soprasotto* gemella_ss = zona_mr->link_soprasotto;
+
+    printf ("[MONDO REALE]\n");
+    printf ("- Tipo zona: %s\n", get_nome_zona(zona_mr->tipo));
+    printf ("- Nemico: %s\n", get_nome_nemico(zona_mr->nemico));
+    printf ("- Oggetto: %s\n", get_nome_oggetto(zona_mr->oggetto));
+
+    printf ("\n[SOPRASOTTO]\n");
+    if (gemella_ss != NULL) {
+        printf ("- Tipo zona: %s\n", get_nome_zona(gemella_ss->tipo));
+        printf ("- Nemico: %s\n", get_nome_nemico(gemella_ss->nemico));
+    } else {
+        printf (RED"- Errore Critico: collegamento dimensionale mancante!\n"RESET);
     }
 }
