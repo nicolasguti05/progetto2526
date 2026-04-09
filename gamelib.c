@@ -193,7 +193,40 @@ static void cancella_zona() {
 }
 
 static void stampa_mappa() {
+    int scelta_mondo;
+    printf ("\nQuale zona si vuole stampare?\n");
+    printf ("1) Mondo Reale\n");
+    printf ("2) Soprasotto\n");
+    printf ("Scelta: ");
+    scanf ("%d", &scelta_mondo);
 
+    if (scelta_mondo == 1) {
+        struct Zona_mondoreale* corrente = prima_zona_mondoreale;
+        int i = 1;
+        printf ("\n--- MAPPA MONDOREALE ---\n");
+        while(corrente != NULL) {
+            printf ("Zona %d [%s] - Nemico: %s - Oggetto: %s\n",
+            i++, get_nome_zona(corrente->tipo),
+            get_nome_nemico(corrente->nemico),
+            get_nome_oggetto(corrente->oggetto));
+            corrente = corrente->avanti; // Scorrimento lista
+        }
+    } else if (scelta_mondo == 2) {
+        struct Zona_soprasotto* corrente = prima_zona_soprasotto;
+        int i = 1;
+        printf ("\n--- MAPPA SOPRASOTTO ---\n");
+        while(corrente != NULL) {
+            printf ("Zona %d [%s] - Nemico: %s\n",
+            i++, get_nome_zona(corrente->tipo),
+            get_nome_nemico(corrente->nemico));
+            corrente = corrente->avanti;
+        }
+    } else {
+        printf ("Scelta non valida.\n");
+    }
+    printf ("\nPremere INVIO per tornare al menu...\n");
+    while (getchar() != '\n');
+    getchar();
 }
 
 static void stampa_zona_specifica() {
