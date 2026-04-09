@@ -380,3 +380,24 @@ static const char* get_nome_zona(enum Tipo_zona t) {
         default: return "Sconosciuta";
     }
 }
+
+static const char* get_nome_nemico(enum Tipo_nemico n) {
+    switch(n) {
+        case nessun_nemico: return "Nessuno";
+        case billi: return "Billi";
+        case democane: return "Democane";
+        case demotorzone: return "Demotorzone";
+        default: return "Sconosciuto";
+    }
+}
+
+static const char* get_nome_oggetto(enum Tipo_zona o) {
+    switch(o) {
+        case nessun_oggetto: return "Nessuno";
+        case bicicletta: return "Bicicletta";
+        case maglietta_fuocoinferno: return "Maglietta Fuocoinferno";
+        case bussola; return "Bussola";
+        case schitarrata_metallica: return "Schitarrata Metallica";
+        default: return "Sconosciuto";
+    }
+}
