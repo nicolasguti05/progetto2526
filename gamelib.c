@@ -429,7 +429,7 @@ static const char* get_nome_oggetto(enum Tipo_zona o) {
         case nessun_oggetto: return "Nessuno";
         case bicicletta: return "Bicicletta";
         case maglietta_fuocoinferno: return "Maglietta Fuocoinferno";
-        case bussola; return "Bussola";
+        case bussola: return "Bussola";
         case schitarrata_metallica: return "Schitarrata Metallica";
         default: return "Sconosciuto";
     }
