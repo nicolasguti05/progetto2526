@@ -232,7 +232,33 @@ static void stampa_mappa() {
 }
 
 static void stampa_zona_specifica() {
+    if (prima_zona_mondoreale == NULL) {
+        printf ("\nErrore: la mappa è vuota.\n");
+        sleep(2);
+        return;
+    }
 
+    int posizione;
+    printf("\nInserisci la posizione della zona che vuoi ispezionare: ");
+
+    if (scanf("%d", &posizione) != 1 || posizione < 1) {
+        printf(RED"Errore: Inserisci un numero intero positivo\n"RESET);
+        while (getchar() != '\n');
+        sleep(2);
+        return;
+    }
+
+    struct Zona_mondoreale* zona_trovata = trova_zona_per_indice(posizione);
+
+    if (zona_trovata == NULL) {
+        printf ("Non esiste nessuna zona nella posizione %d,\n", posizione);
+    } else {
+        stampa_dettagli_nodi(zona_trovata, posizione);
+    }
+
+    printf("\nPremi INVIO per tornare al menu...\n");
+    while(getchar() != '\n');
+    getchar();
 }
 
 static void chiudi_mappa() {
